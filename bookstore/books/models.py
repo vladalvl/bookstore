@@ -45,7 +45,7 @@ class Book(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('book_details', kwargs={'book_id': self.id})
+        return reverse('book_details', kwargs={"slug": self.url})
 
     class Meta:
         ordering = ('title',)
@@ -105,7 +105,7 @@ class Reviews(models.Model):
     book = models.ForeignKey(Book, verbose_name='книга', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return f"{self.name} - {self.book}"
 
     class Meta:
         verbose_name = 'Отзыв'
